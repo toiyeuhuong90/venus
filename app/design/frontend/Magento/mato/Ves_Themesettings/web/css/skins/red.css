@@ -1,0 +1,82 @@
+a:hover, .alink:hover, a:focus, .alink:focus,
+.page-header #topbar .block-topbar span ,
+.page-header .top-setting .header-links-dropdown li a:hover,
+.page-header .ves-menutop .ves-megamenu li.level0 > a:hover span, 
+.page-header .ves-menutop .ves-megamenu li.level0 > a:focus span,
+.cart-top .minicart-wrapper .action.showcart.active::before, 
+.cart-top .minicart-wrapper .action.showcart::before,
+.ves-block-top .block-static-block .image-description h2,
+.ves-block-top .block-static-block .image-description.image-description-right p,
+.ves-block-top.ves-block-image .block-center .widget-images .image-item .image-description h3,
+.productlist-widget .etabs .tab a:hover, 
+.productlist-widget .etabs .tab a.active,
+.product-block .product-item-actions .actions-primary .add-to-cart:hover .icon-shopping109, 
+.product-block .product-item-actions .actions-primary .add-to-cart:focus .icon-shopping109,
+.ves-footer a:hover,
+.ves-footer a.link,
+.cms-beat-homepage-3 .block.imageslider-widget .caption h2 span, 
+.cms-beat-homepage-4 .block.imageslider-widget .caption h2 span, 
+.cms-beat-homepage-5 .block.imageslider-widget .caption h2 span, 
+.cms-ves-beat-homepage-6 .block.imageslider-widget .caption h2 span,
+.cms-beat-homepage-3 .block.imageslider-widget .caption h3, 
+.cms-beat-homepage-4 .block.imageslider-widget .caption h3, 
+.cms-beat-homepage-5 .block.imageslider-widget .caption h3, 
+.cms-ves-beat-homepage-6 .block.imageslider-widget .caption h3,
+.ves-blog .post-title h3 a:hover,
+.page-header .header-layout-2 .block-topbar .icon-whatsapp, 
+.page-header .header-layout-3 .block-topbar .icon-whatsapp, 
+.page-header .header-layout-4 .block-topbar .icon-whatsapp,
+.ves-megamenu.menu-click > li.level0 a:hover, 
+.ves-megamenu.menu-hover > li.level0 a:hover,
+.sidebar .block.filter .filter-options .filter-options-title:hover,
+.page-products .toolbar .pages strong.page,
+.toolbar-bottom .toolbar-products .pages .action::before,
+.toolbar-bottom .toolbar-products .pages li > a, 
+.toolbar-bottom .toolbar-products .pages li > span, 
+.toolbar-bottom .toolbar-products .pages li.current,
+.page-products .toolbar .switcher .switcher-dropdown li a:hover,
+.product-info-main .product-addto-links a:hover, 
+.product-options-bottom .product-addto-links a:hover,
+.product-info-main .product-social-links .fa, 
+.product-options-bottom .product-social-links .fa,
+.product.info.detailed .data .title.active > .switch{
+	color: #945151; 
+}
+
+.product-block .product-item-details .product-item-name a:hover,
+.product-block .product-item-actions .actions-primary .add-to-cart:hover, 
+.product-block .product-item-actions .actions-primary .add-to-cart:focus,
+.ves-megamenu .dropdown > .dropdown-menu a:hover, 
+.page-header .ves-menutop .ves-megamenu .dropdown-menu .submenu.dropdown-mega a:hover {
+	color: #945151!important; 
+}
+
+.btn-default, button, .button, input.button, a.action.primary, .action.primary, .btn ,
+.block.imageslider-widget .caption p::before,
+.owl-carousel.owl-loaded .owl-dots .owl-dot.active ,
+.widget-sociallinks ul li:hover,
+.ves-footer .block.newsletter .actions .subscribe,
+.product-block .product-image .actions-secondary a:hover, 
+.product-block .product-image .actions-secondary a:focus ,
+.cms-beat-homepage-5 .ves-block-top.ves-block-image .block-center.block-center-main .widget-images .image-item .image-description h3,
+.page-header .header-layout-3 .ves-menutop,
+.scrollup {
+	background-color: #945151;
+}
+
+.cms-beat-homepage-3 .block.imageslider-widget .caption .button:hover, 
+.cms-beat-homepage-4 .block.imageslider-widget .caption .button:hover,
+.cms-beat-homepage-5 .block.imageslider-widget .caption .button:hover, 
+.cms-ves-beat-homepage-6 .block.imageslider-widget .caption .button:hover, 
+.cms-beat-homepage-3 .block.imageslider-widget .caption button:hover, 
+.cms-beat-homepage-4 .block.imageslider-widget .caption button:hover, 
+.cms-beat-homepage-5 .block.imageslider-widget .caption button:hover, 
+.cms-ves-beat-homepage-6 .block.imageslider-widget .caption button:hover ,
+
+.product-info-main .box-tocart .action.tocart, .product-options-bottom .box-tocart .action.tocart, 
+.product-info-main .product-options-bottom .box-tocart .action.tocart, 
+.product-options-bottom .product-options-bottom .box-tocart .action.tocart,
+.product.info.detailed .data .title.active > .switch{
+	background-color: #945151;
+	border-color: #945151;
+}

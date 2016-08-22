@@ -1,0 +1,196 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Magento\Catalog\Block\Product\View */
+?>
+<?php $_product = $block->getProduct(); ?>
+<?php
+$ves = $this->helper('Ves\Themesettings\Helper\Theme');
+$show_addtocart = $ves->getProductPageCfg('element_settings/show_addtocart');
+$show_email = $ves->getProductPageCfg('element_settings/show_email');
+$show_wishlist = $ves->getProductPageCfg('element_settings/show_wishlist');
+$_wishlistSubmitParams = $this->helper('Magento\Wishlist\Helper\Data')->getAddParams($_product);
+?>
+<?php if($show_addtocart){ ?>
+<?php $buttonTitle = __('Add to Cart'); ?>
+<?php if ($_product->isSaleable()): ?>
+    <div class="box-tocart">
+        <div class="fieldset">
+            <?php if ($block->shouldRenderQuantity()): ?>
+                <div class="field qty">
+                   <label class="label" for="qty"><span><?php /* @escapeNotVerified */ echo __('Quanty:') ?></span></label> 
+                    <div class="control">
+                            <div class="quantity-adder">
+                                <div class="quantity-number pull-left">
+                                    <input type="number"
+                                    name="qty"
+                                    id="qty"
+                                    maxlength="12"
+                                    value="<?php /* @escapeNotVerified */ echo $block->getProductDefaultQty() * 1 ?>"
+                                    title="<?php /* @escapeNotVerified */ echo __('Quantity') ?>" class="input-text qty"
+                                    data-validate="<?php echo $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                                    />
+                                </div>
+                                <div class="quantity-wrapper pull-left">
+                                    <span class="add-up add-action fa fa-plus" data-parentqty="true"></span>  
+                                    <span class="add-down add-action fa fa-minus" data-parentqty="true"></span>
+                                </div>
+                            </div>
+                            <script type="text/javascript">
+                                require(["jquery"], function(){
+                                    jQuery(window).ready( function(){
+                                       jQuery(".quantity-adder .add-action").click( function(){
+                                        if( jQuery(this).hasClass('add-up') ) {  
+                                            jQuery(".quantity-adder .qty").val( parseInt(jQuery(".quantity-adder .qty").val()) + 1 );
+                                        }else {
+                                            if( parseInt(jQuery(".quantity-adder .qty").val())  > 1 ) {
+                                                jQuery(".quantity-adder .qty").val( parseInt(jQuery(".quantity-adder .qty").val()) - 1 );
+                                            }
+                                        }
+                                    } );
+                                   })
+                                });
+                            </script>
+                        </div>
+                    </div>
+            <?php endif; ?>
+    </div>
+   
+</div>
+<?php endif; ?>
+ <div class="actions">
+    <button type="submit"
+            title="<?php /* @escapeNotVerified */ echo $buttonTitle ?>"
+            class="action primary tocart"
+            id="product-addtocart-button"> 
+            
+        <span><?php /* @escapeNotVerified */ echo $buttonTitle ?></span>
+    </button>
+    <?php echo $block->getChildHtml('', true) ?>
+
+
+        <?php
+    /**
+     * Copyright © 2015 Magento. All rights reserved.
+     * See COPYING.txt for license details.
+     */
+
+    // @codingStandardsIgnoreFile
+
+    /** @var $block \Magento\Catalog\Block\Product\View*/
+
+    ?>
+    <?php $_product = $block->getProduct(); ?>
+    <?php
+    $ves = $this->helper('Ves\Themesettings\Helper\Theme');
+    $show_addtocart = $ves->getProductPageCfg('element_settings/show_addtocart');
+    $show_email = $ves->getProductPageCfg('element_settings/show_email');
+    $show_wishlist = $ves->getProductPageCfg('element_settings/show_wishlist');
+    $_wishlistSubmitParams = $this->helper('Magento\Wishlist\Helper\Data')->getAddParams($_product);
+
+    ?>
+    <?php
+    $_product = $block->getProduct();
+    $_wishlistSubmitParams = $this->helper('Magento\Wishlist\Helper\Data')->getAddParams($_product);
+    $compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');
+
+    $ves = $this->helper('Ves\Themesettings\Helper\Theme');
+    $show_compare = $ves->getProductPageCfg('element_settings/show_compare');
+    $show_wishlist = $ves->getProductPageCfg('element_settings/show_wishlist');
+    $show_email = $ves->getProductPageCfg('element_settings/show_email');
+    $show_sharelinks = $ves->getProductPageCfg('element_settings/show_sharelinks');
+    ?>
+
+    <?php if($show_compare || $show_wishlist || $show_email){ ?>
+    <div class="product-addto-links" data-role="add-to-links">
+    
+            <div class="add-to-links">
+                <?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow() && $show_wishlist) : ?>
+                    <a href="#"
+                    class="add-to-wishlist"
+                    data-post='<?php /* @escapeNotVerified */ echo $_wishlistSubmitParams; ?>'
+                    data-action="add-to-wishlist"><span><?php /* @escapeNotVerified */ echo __('<i class="fa fa-heart"></i>') ?></span></a>
+                <?php endif; ?>
+                <?php if($show_compare){ ?>
+                <a href="#" data-post='<?php /* @escapeNotVerified */ echo $compareHelper->getPostDataParams($_product);?>'
+                    data-role="add-to-links"
+                    class="add-to-compare"><span><?php /* @escapeNotVerified */ echo __('<i class="fa fa-sliders"></i>') ?></span></a>
+                <?php } ?> 
+            </div>
+
+            <div class="add-sharelinks">
+                <?php if($show_email){ ?>
+                <?php if ($block->canEmailToFriend()): ?>
+                    <a href="<?php /* @escapeNotVerified */ echo $this->helper('Magento\Catalog\Helper\Product')->getEmailToFriendUrl($_product) ?>"
+                     class="mailto1 friend"><span><?php /* @escapeNotVerified */ echo __('<i class="fa fa-envelope-o"></i>
+                     Email') ?></span></a>
+                 <?php endif; ?>
+                 <?php } ?>
+
+                 <?php if($show_sharelinks){ ?>
+                 <?php $_helper = $this->helper('Magento\Catalog\Helper\Output'); ?>
+                 <?php $_productName = urlencode(trim($_helper->productAttribute($_product, $_product->getName(), 'name')))?>
+                 <?php $_productImageUrl = urlencode(trim($this->helper('Magento\Catalog\Helper\Image')->init($_product, 'product_page_image_large')->getUrl()))?>
+                 <?php $_productUrl = urlencode(trim($_product->getProductUrl()))?>
+
+                 <?php $_u = 'p[url]=' . $_productUrl . '&p[images][0]=' . $_productImageUrl . '&p[title]=' . $_productName . '&p[summary]=' . urlencode(trim($_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description'))); ?>
+                 <a href="<?php echo 'http://www.facebook.com/sharer.php?s=100&' . $_u; ?>" target="_blank" title="<?php echo __('Share on Facebook') ?>" class="link-facebook">
+                    <?php echo __('Share Facebook') ?>
+                </a>
+                <a href="<?php echo 'http://twitter.com/home?status=' . $_productName . '+' . $_productUrl; ?>" target="_blank" title="<?php echo __('Share on Twitter') ?>" class="link-twitter"><?php echo __('Share on Twitter') ?></a>
+                <?php } ?>
+            </div>
+
+    </div>
+    <?php } ?>
+    <?php if($show_wishlist){ ?>
+    <script type="text/x-magento-init">
+        {
+            "body": {
+                "addToWishlist": <?php /* @escapeNotVerified */ echo $this->helper('Magento\Framework\Json\Helper\Data')->jsonEncode($block->getWishlistOptions())?>
+            }
+        }
+    </script>
+    <?php } ?>
+</div>
+<?php if ($block->isRedirectToCartEnabled()) : ?>
+<script type="text/x-magento-init">
+    {
+        "#product_addtocart_form": {
+            "Magento_Catalog/product/view/validation": {
+                "radioCheckboxClosest": ".nested"
+            }
+        }
+    }
+</script>
+<?php else : ?>
+<script>
+    require([
+        'jquery',
+        'mage/mage',
+        'Magento_Catalog/product/view/validation',
+        'Magento_Catalog/js/catalog-add-to-cart'
+    ], function ($) {
+        'use strict';
+
+        $('#product_addtocart_form').mage('validation', {
+            radioCheckboxClosest: '.nested',
+            submitHandler: function (form) {
+                var widget = $(form).catalogAddToCart({
+                    bindSubmit: false
+                });
+
+                widget.catalogAddToCart('submitForm', $(form));
+
+                return false;
+            }
+        });
+    });
+</script>
+<?php endif; ?>
+<?php } ?>

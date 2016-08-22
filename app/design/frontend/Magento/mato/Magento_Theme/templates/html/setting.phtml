@@ -1,0 +1,17 @@
+<?php
+$helper = $this->helper("Ves\Themesettings\Helper\Data");
+?>
+<div class="store-language">
+<?php echo $this->getChildHtml('store_language_custom') ?>
+</div>
+<div class="top-currency">
+<?php echo $this->getChildHtml('currency_custom') ?>
+</div>
+<div class="toplogin">
+<?php if($helper->isLoggedIn()){ ?>
+<?php echo $this->getChildHtml('top_links'); ?>
+<?php }else{ ?>
+<?php echo $this->getChildHtml('customer_form_login'); ?>
+<?php echo $this->getChildHtml('header_cookie'); ?>
+<?php } ?>
+</div>

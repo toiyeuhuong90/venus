@@ -1,0 +1,15 @@
+<?php
+$helper = $this->helper("Ves\Blog\Helper\Data");
+?>
+<div class="blog-searchform block">
+	<form role="search" method="get" class="search-form" action="<?php echo $helper->getSearchFormUrl(); ?>">
+		<div class="block-title">
+		<strong>
+		<span class="screen-reader-text"><?php echo __('Search for:'); ?></span>
+		</strong>
+			<input type="search" class="search-field" placeholder="<?php echo __('Search …'); ?>" value="<?php echo $helper->getSearchKey() ?>" name="s" title="<?php echo __('Search for:'); ?>">
+
+		</div>
+		<button type="submit" class="search-submit"><span class="screen-reader-text"><?php echo __('Search'); ?></span></button>
+	</form>
+</div>

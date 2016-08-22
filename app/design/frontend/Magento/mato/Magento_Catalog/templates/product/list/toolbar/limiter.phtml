@@ -1,0 +1,50 @@
+<?php
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * Product list toolbar
+ *
+ * @var $block \Magento\Catalog\Block\Product\ProductList\Toolbar
+ */
+use Magento\Catalog\Model\Product\ProductList\Toolbar;
+?>
+<div class="switcher limiter">
+	<div class="switcher" >
+	<!-- <span class="switcher-title hidden-xs"><?php echo __('Show: ') ?></span>	 -->
+	<div class="actions dropdown options switcher-options">
+         <?php foreach ($block->getAvailableLimit() as $_key => $_limit): ?>
+            <?php if ($block->isLimitCurrent($_key)): ?>
+                <?php $limitKey = $_key; ?>
+                <div class="action toggle switcher-trigger list-lmt">
+                    <strong><span><?php echo $_limit ?></span></strong>
+                </div>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <ul class="dropdown switcher-dropdown" >
+              <?php foreach ($block->getAvailableLimit() as $_key => $_limit): ?>
+                <li value="<?php echo $_key; ?>" >
+                    <?php
+                    $url = $this->getPagerUrl();
+                    $orderUrl = Toolbar::LIMIT_PARAM_NAME . '=' . $limitKey;
+                    $url1 = str_replace($orderUrl, Toolbar::LIMIT_PARAM_NAME . '=' . $_key, $url);
+                    if (strpos($url, $orderUrl) === false) {
+                        $url1 = $url . '?' . Toolbar::LIMIT_PARAM_NAME . '=' . $_key;
+                    }
+                    ?>
+                    <a href="<?php echo $url1 ?>" title="<?php echo $_limit ?>">
+                        <?php echo $_limit; ?>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+	</div>
+    <!-- <span class="limiter-text"><?php /* @escapeNotVerified */ echo __('per page') ?></span> -->
+	</div>
+</div>

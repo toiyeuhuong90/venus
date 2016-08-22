@@ -1,0 +1,32 @@
+.page-header .dropdown .dropdown-menu li a:hover,
+.page-header .ves-menutop .ves-megamenu li.level0 > a:hover span,
+.page-header .icon.top-setting ,
+.block .block-title,
+.product-block .product-item-details .price-box .old-price .price,
+.ves-deal .productlist-widget .product-block .product-item-details .price-box .old-price .price,
+.ves-product-list.productlist-widgets .product-block .product-item-details .price-box .old-price .price,
+.owl-nav [class*="owl-"]:hover::after,
+.product-block .product-item-info:hover .product-item-details .actions-secondary a.add-to-wishlist,
+.ves-categories-info .block-content h3 a span.first-letter,
+.ves-categories-info .block-content h3 a:hover span.name,
+.ves-banner .widget-images .image-description a:hover,
+.ves-footer a:hover{
+	color: #16c584;
+}
+
+.product-block .product-item-details .product-item-name a:hover {
+	color: #16c584!important;
+}
+
+.product-block .product-image .product-img::after {
+	background-color: rgba(27, 197, 132, 0.8);
+}
+.page-header .minicart-wrapper .counter-number ,
+.ves-footer .block.newsletter .actions .subscribe:hover,
+.scrollup{
+	background-color: #16c584;
+}
+
+.owl-nav [class*="owl-"]:hover {
+	border-color: #16c584;
+}

@@ -1,0 +1,5 @@
+<?php
+$top_links = $this->getLayout()->getChildBlock("ves_header", "top_links");
+if($top_links){
+	echo $top_links->setTemplate("Magento_Theme::html/account_links.phtml")->toHtml();
+}

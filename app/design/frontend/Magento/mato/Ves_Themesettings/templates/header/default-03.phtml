@@ -1,0 +1,191 @@
+<?php
+$ves = $this->helper('Ves\Themesettings\Helper\Theme');
+$sticky = $ves->getHeaderCfg("sticky_settings/sticky");
+$sticky_type = $ves->getHeaderCfg("sticky_settings/sticky_type");
+$logo = $ves->getHeaderCfg("sticky_settings/logo");
+$menu = $ves->getHeaderCfg("sticky_settings/menu");
+$search = $ves->getHeaderCfg("sticky_settings/search");
+$custom_block = $ves->getHeaderCfg("sticky_settings/custom_block");
+$topcart = $ves->getHeaderCfg("sticky_settings/topcart");
+$topbar = $ves->getHeaderCfg("sticky_settings/topbar");
+$enable_toplinks = $ves->getHeaderCfg("toplinks_settings/enable");
+$show_search = $ves->getHeaderCfg("search_settings/search");
+$show_topbar = $ves->getHeaderCfg("topbar/show_topbar");
+
+if($sticky_type == 'all'){
+	$logo = $menu = $search = $topcart = $toplinks = $topbar= true;	
+}
+?>
+<div id="ves-header" class="header-layout-3">
+	<!-- Top bar -->
+	<?php if($show_topbar): ?>
+	    <?php if($custom_block = $this->getChildHtml("custom_block")): ?>
+		<div id="topbar" class="panel wrapper page-topbar clearfix hidden-xs hidden-sm <?php echo $topbar?"sticky-item":"sticky-item-hidden"  ?>">
+			<div class="container page-main">
+				<div class="row">
+				    <div class="pull-left no-padding col-lg-6 col-md-6 col-sm-5 col-xs-12">
+						<div class="ves-inner">
+							<div class="block-topbar">
+								<?php echo $custom_block;?>
+							</div>
+						</div>
+					</div>
+				</div>	
+			</div>			
+		</div>
+		<?php endif; ?>
+	<?php endif; ?>
+
+	<!-- header content -->
+	<div class="header-content clearfix">
+		<div class="page-main">
+		<div class="page-main-inner"> 
+		    <div class="row">
+		        <div class="ves-inner">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-3 no-padding">
+						<?php if($show_search): ?>
+					 	   	<div class="icon search-desktop <?php echo $search?"sticky-item":"sticky-item-hidden" ?>">
+							    <div class="dropdown" id="autosearch">
+								    <div data-toggle="dropdown" class="dropdown-toggle" id="ves_autosearch">
+								        <i class="fa fa-search"></i>                                            
+								    </div>
+								    <?php echo $this->getChildHtml('ves.autosearch') ?> 
+								</div>
+							</div>
+						<?php endif; ?>
+					</div> 
+
+					<div class="col-lg-1 col-md-1 col-sm-2 col-xs-5 no-padding wraplogo logo-wrapper<?php echo $logo?"sticky-item":"sticky-item-hidden"  ?>">
+						<?php echo $this->getChildHtml('logo') ?>
+					</div>
+
+					<div class="col-lg-7 col-md-7 col-sm-5 col-xs-1 wrap-megamenu setting-wrapper">
+					    <!-- Menu top -->
+						<div class="ves-menutop clearfix <?php echo $menu?"sticky-item":"sticky-item-hidden"  ?>"> 
+							<div class="ves-inner page-main">
+								<?php echo $this->getChildHtml('catalog.topnav') ?> 
+							</div> 
+						</div>
+					</div>
+
+					<div class="col-lg-3 col-md-3 col-sm-4 col-xs-3 no-padding">
+                     
+                         <div class="right"> 
+                                <div class="icon cart-top <?php echo $topcart?"sticky-item":"sticky-item-hidden" ?>">
+									<?php echo $this->getChildHtml('minicart') ?>
+								</div>
+
+								<div class="icon ves-switcher hidden-xs hidden-sm">
+								    <div class="dropdown">
+									    <div data-toggle="dropdown" class="dropdown-toggle">
+									        <i class="fa fa-cog"></i>                                            
+									    </div>
+									    <div class="dropdown-menu">
+								     		<?php if($store_language = $this->getChildHtml('store_language_custom')): ?>
+												<div class="switcher-language-wrapper hidden-sm hidden-xs">
+													<?php echo $store_language ?>
+												</div>
+											<?php endif; ?>
+
+											<?php if($currency_block = $this->getChildHtml('currency_custom')): ?>
+												<div class="switcher-currency-wrapper hidden-sm hidden-xs">
+													<?php echo $currency_block ?>
+												</div>
+											<?php endif; ?>
+										</div>
+									</div>
+								</div>
+
+	                            <?php if(($setting_links = $this->getChildHtml('setting_links')) || ($top_links = $this->getChildHtml('top_links'))): ?>
+									<div class="icon top-setting hidden-xs hidden-sm">
+									    <div class="dropdown">
+										    <div data-toggle="dropdown" class="dropdown-toggle">
+										        <i class="fa fa-user"></i>                                            
+										    </div>
+										    <div class="dropdown-menu">
+												<div id="setting">
+													<?php echo $setting_links ?>
+													<?php if($enable_toplinks){ ?>
+														<?php echo $this->getChildHtml('top_links') ?>
+													<?php } ?>
+												</div>
+											</div>
+										</div>
+									</div>
+								<?php endif; ?>
+                         </div>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>
+   
+	<?php if($sticky){ ?>
+	<script type="text/javascript">
+		require([
+			'jquery',
+			'vestheme'
+			], function(){
+				
+				function getScroll () {
+				    var b = document.body;
+				    var e = document.documentElement;
+				    return {
+				        left: parseFloat( window.pageXOffset || b.scrollLeft || e.scrollLeft ),
+				        top: parseFloat( window.pageYOffset || b.scrollTop || e.scrollTop )
+				    };
+				}
+				jQuery(document).ready(function($) {
+					var h = jQuery('.page-header').height();
+					var myHeader = jQuery('.page-header');
+					myHeader.data( 'position', myHeader.position() );
+
+					jQuery(window).scroll(function(){
+						var hPos = myHeader.data('position'), scroll = getScroll();
+						var h_px = jQuery("#ves-header", ".page-header").outerHeight(true)+"px";
+
+						if ( hPos.top < scroll.top) {
+							jQuery('.page-header').delay(1000).addClass("navbar-fixed-top");
+							jQuery('body').delay(1000).addClass("keep-header");
+							var headerHeight = jQuery('.page-header').height();
+							<?php if($sticky_type == 'specify'){ ?>jQuery(".page-wrapper").css({"padding-top":headerHeight+"px"});<?php } ?>
+							jQuery(".sticky-item-hidden").css({"display":"none"});
+							jQuery("#maincontent").delay(1000).css("margin-top", h_px);
+						}else{
+							jQuery(".sticky-item-hidden").css({"display":""});
+							jQuery('.page-header').delay(1000).removeClass("navbar-fixed-top");
+							jQuery('body').delay(1000).removeClass("keep-header");
+							jQuery(".page-wrapper").css({"padding-top":""});
+							jQuery("#maincontent").delay(1000).css({"margin-top": ""});
+						}
+					});
+				});
+			});
+	</script>
+	<?php } ?>
+	<script type="text/javascript">
+		require([
+			'jquery',
+			'vestheme'
+			], function(){
+				jQuery(document).ready(function($) {
+					jQuery('#ves_autosearch .fa-search').on("click", function(){
+                     jQuery('.search_box').css('display','block');
+                     jQuery(".search_box").animate({bottom: '200px'});
+            });
+            jQuery('#ves_autosearch .fa-search').blur(function(event){
+                event.preventDefault();
+                alert("cccc");
+                jQuery('.search_box').css('display','none');
+            });
+            jQuery(document).on('keyup',function(evt) {
+                if (evt.keyCode == 27) {
+                   // $('b').css('color','red');
+                   jQuery('.search_box').css('display','none');
+                }
+            });
+				});
+			});
+	</script>
+</div>

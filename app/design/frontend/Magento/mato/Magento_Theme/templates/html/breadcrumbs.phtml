@@ -1,0 +1,65 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+$_category = $_imgUrl = $att = ''; 
+
+$helper = $this->helper("Ves\Themesettings\Helper\Data");
+
+$_coreRegistry = $helper->getCoreRegistry();
+$_category = $_coreRegistry->registry("current_category") ;
+$_product = $_coreRegistry->registry("current_product") ;
+
+if($_product){
+$cats = $_product->getCategoryIds();
+foreach ($cats as $category_id) {
+    $_cat = $helper->getObjectManager()->create('Magento\Catalog\Model\Category')->load($category_id) ;
+    if($_cat){
+        $_category = $_cat;
+        break;
+    }
+}
+}
+?>
+
+<?php if($_category){ ?>
+<?php
+$_imgUrl = $_category->getImageUrl();
+$att = "class='category'";
+$cate=$_category->getName();
+if($_imgUrl){ $att = "class='breadcrumbs category has-image' style='background-image:url(".$_imgUrl.")'"; }
+?>
+<?php } ?>
+<?php if ($crumbs && is_array($crumbs)) : ?>
+ 
+  
+    <div <?php if(!$_category){ ?>class="breadcrumbs"<?php }else{ ?> <?php echo $att; ?> <?php } ?> >
+        <div class="row"> 
+            <div class="page-main">  
+                <ul class="items">
+                    <?php foreach ($crumbs as $crumbName => $crumbInfo) : ?>
+                        <li class="item <?php /* @escapeNotVerified */ echo $crumbName ?>">
+                        <?php if ($crumbInfo['link']) : ?>
+                            <a href="<?php /* @escapeNotVerified */ echo $crumbInfo['link'] ?>" title="<?php echo $block->escapeHtml($crumbInfo['title']) ?>">
+                                <?php echo $block->escapeHtml($crumbInfo['label']) ?>
+                            </a>
+                        <?php elseif ($crumbInfo['last']) : ?>
+                            <strong><?php echo $block->escapeHtml($crumbInfo['label']) ?></strong>
+                        <?php else: ?>
+                            <?php echo $block->escapeHtml($crumbInfo['label']) ?>
+                        <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php if($_category){ ?>
+                <h2><?php echo $_category->getName() ?></h2>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+
+
+<?php endif; ?>
